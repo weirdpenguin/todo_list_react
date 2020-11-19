@@ -11,14 +11,14 @@ class Todo extends React.Component {
         };
 
         this.addTodo = this.addTodo.bind(this);
-        this.deleleTodo = this.deleleTodo.bind(this);
+        this.deleteTodo = this.deleteTodo.bind(this);
     }
 
     addTodo(todo) {
         this.setState((state) => ({todos: state.todos.concat(todo)}));
     }
 
-    deleleTodo(id) {
+    deleteTodo(id) {
         this.setState((state) => ({todos: state.todos.filter(todo => todo.id !== id)}));
     }
 
@@ -32,7 +32,7 @@ class Todo extends React.Component {
                     addTodo={this.addTodo} />
                 <TodoList
                     todos={todos}
-                    deleleTodo={this.deleleTodo} />
+                    deleteTodo={this.deleteTodo} />
             </div>
         );
     }
