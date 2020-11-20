@@ -37,7 +37,7 @@ class Todo extends React.Component {
             }
         }
 
-        this.setState();
+        this.setState({todos: todos});
     }
 
     render() {
