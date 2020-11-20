@@ -12,6 +12,7 @@ class Todo extends React.Component {
 
         this.addTodo = this.addTodo.bind(this);
         this.deleteTodo = this.deleteTodo.bind(this);
+        this.selectTodo = this.selectTodo.bind(this);
     }
 
     addTodo(todo) {
@@ -20,6 +21,23 @@ class Todo extends React.Component {
 
     deleteTodo(id) {
         this.setState((state) => ({todos: state.todos.filter(todo => todo.id !== id)}));
+    }
+
+    selectTodo(id) {
+        /* map */
+        let todos = this.state.todos.slice();
+        for (let i = 0; i < todos.length; i++) {
+            if (todos[i].id === id) {
+                let selected = Object.assign(
+                    {},
+                    todos[i],
+                    {checked: !todos[i].checked}
+                );
+                todos[i] = selected;
+            }
+        }
+
+        this.setState();
     }
 
     render() {
@@ -32,6 +50,7 @@ class Todo extends React.Component {
                     addTodo={this.addTodo} />
                 <TodoList
                     todos={todos}
+                    selectTodo={this.selectTodo}
                     deleteTodo={this.deleteTodo} />
             </div>
         );

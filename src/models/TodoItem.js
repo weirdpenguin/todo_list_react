@@ -2,6 +2,7 @@ class TodoItem {
     constructor(text) {
         this.id = TodoItem.nextId++;
         this.text = text;
+        this.checked = false;
     }
 }
 

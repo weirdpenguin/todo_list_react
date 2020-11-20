@@ -5,7 +5,11 @@ class TodoList extends React.Component {
         const todos = this.props.todos;
         const todosList = todos.map((todo) =>
             <li key={todo.id.toString()}>
-                <input type='checkbox' />
+                <input
+                    type='checkbox'
+                    checked={todo.checked}
+                    onChange={(event) => this.props.selectTodo(todo.id)}
+                />
                 {todo.text}
                 <button
                     onClick={(event) => this.props.deleteTodo(todo.id)}>
