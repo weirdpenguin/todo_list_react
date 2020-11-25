@@ -8,18 +8,25 @@ class TodoList extends React.Component {
                 <input
                     type='checkbox'
                     checked={todo.checked}
-                    onChange={(event) => this.props.selectTodo(todo.id)}
+                    onChange={() => this.props.selectTodo(todo.id)}
                 />
                 {todo.text}
                 <button
-                    onClick={(event) => this.props.deleteTodo(todo.id)}>
+                    onClick={() => this.props.deleteTodo(todo.id)}>
                         <i className='fas fa-eraser'></i>
                 </button>
             </li>
         );
 
         return (
-            <ul>{todosList}</ul>
+            <div>
+                <input
+                    type='checkbox'
+                    className='fas fa-carrot'
+                    onClick={this.props.selectAllTodos}
+                />
+                <ul>{todosList}</ul>
+            </div>
         );
     }
 }
