@@ -21,8 +21,9 @@ class TodoList extends React.Component {
         return (
             <div>
                 <input
+                    className='fas fa-carrot'       //!
                     type='checkbox'
-                    className='fas fa-carrot'
+                    checked={this.props.checkAllTodos}
                     onClick={this.props.selectAllTodos}
                 />
                 <ul>{todosList}</ul>
