@@ -8,13 +8,14 @@ class Todo extends React.Component {
 
         this.state = {
             todos: [],
-            checkAllTodos: false,
+            checkedAllTodos: false,
         };
 
         this.addTodo = this.addTodo.bind(this);
         this.deleteTodo = this.deleteTodo.bind(this);
-        this.selectTodo = this.selectTodo.bind(this);
-        this.selectAllTodos = this.selectAllTodos.bind(this);
+        this.checkTodo = this.checkTodo.bind(this);
+        this.checkAllTodos = this.checkAllTodos.bind(this);
+        this.deleteCheckedTodos = this.deleteCheckedTodos.bind(this);
     }
 
     addTodo(todo) {
@@ -22,20 +23,22 @@ class Todo extends React.Component {
     }
 
     deleteTodo(id) {
-        this.setState((state) => ({todos: state.todos.filter((todo) => todo.id !== id)}));
+        this.setState((state) => ({
+            todos: state.todos.filter((todo) => todo.id !== id)
+        }));
     }
 
-    selectTodo(id) {
+    checkTodo(id) {
         this.setState((state) => ({
             todos: state.todos.map(
                 (todo) => {
                     if (todo.id === id) {
-                        let selected = Object.assign(
+                        let checked = Object.assign(
                             {},
                             todo,
                             {checked: !todo.checked}
                         );
-                        return selected;
+                        return checked;
                     }
                     return todo;
                 }
@@ -43,24 +46,27 @@ class Todo extends React.Component {
         }));
     }
 
-    selectAllTodos() {
+    checkAllTodos() {
         let todos = this.state.todos.slice();
 
         this.setState((state) => ({
-            checkAllTodos: !state.checkAllTodos
-        }));
-
-        this.setState((state) => ({
+            checkedAllTodos: !state.checkedAllTodos,
             todos: todos.map(
                 (todo) => {
-                    let selectAll = Object.assign(
+                    let checkAll = Object.assign(
                         {},
                         todo,
-                        {checked: state.checkAllTodos}
+                        {checked: !state.checkedAllTodos}
                     );
-                    return selectAll;
+                    return checkAll;
                 }
             )
+        }));
+    }
+
+    deleteCheckedTodos() {
+        this.setState((state) => ({
+            todos: state.todos.filter((todo) => !todo.checked)
         }));
     }
 
@@ -75,10 +81,11 @@ class Todo extends React.Component {
                 />
                 <TodoList
                     todos={todos}
-                    checkAllTodos={this.checkAllTodos}
-                    selectTodo={this.selectTodo}
-                    selectAllTodos={this.selectAllTodos}
+                    checkAllTodos={this.state.checkedAllTodos}
+                    checkTodo={this.checkTodo}
                     deleteTodo={this.deleteTodo}
+                    checkAllTodosF={this.checkAllTodos}
+                    deleteCheckedTodos={this.deleteCheckedTodos}
                 />
             </div>
         );
