@@ -16,6 +16,7 @@ class Todo extends React.Component {
         this.checkTodo = this.checkTodo.bind(this);
         this.checkAllTodos = this.checkAllTodos.bind(this);
         this.deleteCheckedTodos = this.deleteCheckedTodos.bind(this);
+        this.checkTodosStatus = this.checkTodosStatus.bind(this);
     }
 
     addTodo(todo) {
@@ -29,6 +30,8 @@ class Todo extends React.Component {
     }
 
     checkTodo(id) {
+        // проверка: если все (todo.checked === true) => менять checkedAllTodos на true
+        // + проверка: убирать true с checkedAllTodos при снятии галочки
         this.setState((state) => ({
             todos: state.todos.map(
                 (todo) => {
@@ -44,24 +47,54 @@ class Todo extends React.Component {
                 }
             )
         }));
+        this.checkTodosStatus();
+        console.log(this.state.checkedAllTodos);
+    }
+
+    checkTodosStatus() {
+        this.setState((state) => ({
+            checkedAllTodos: state.todos.every(todo => todo.checked === true)
+        }));
     }
 
     checkAllTodos() {
-        let todos = this.state.todos.slice();
+        // this.setState({ todos: [] });
+        
+        // let todos = this.state.todos.slice();
 
-        this.setState((state) => ({
-            checkedAllTodos: !state.checkedAllTodos,
-            todos: todos.map(
-                (todo) => {
-                    let checkAll = Object.assign(
-                        {},
-                        todo,
-                        {checked: !state.checkedAllTodos}
-                    );
-                    return checkAll;
-                }
-            )
-        }));
+        // this.setState((state) => ({
+            // checkedAllTodos: !state.checkedAllTodos,
+        //     todos: todos.map(
+        //         (todo) => {
+        //             let checkAll = Object.assign(
+        //                 {},
+        //                 todo,
+        //                 {checked: !state.checkedAllTodos}
+        //             );
+        //             return checkAll;
+        //         }
+        //     )
+        // }));
+        this.setState(function(state) {
+            let todos = state.todos.slice();
+
+            return ({
+                checkedAllTodos: !state.checkedAllTodos,
+                todos: todos.map(
+                    (todo) => {
+                        let checkAll = Object.assign(
+                            {},
+                            todo,
+                            {checked: !state.checkedAllTodos}
+                        );
+                        return checkAll;
+                    }
+                )
+
+            });
+        });
+        // console.log(this.state.checkedAllTodos);
+        console.log(this.state.todos);
     }
 
     deleteCheckedTodos() {

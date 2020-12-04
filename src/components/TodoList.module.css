@@ -1,0 +1,70 @@
+/* selected todo bg-color: 5562eb, text-color: ffffff, checkbox-bg-color: 54e0c7
+default todo bg-color ffffff, text-color: 000000, checkbox-border-color: d9dee2 */
+table, .todo, .checked_todo {
+    border: 4px solid #d1d7dc;
+    border-collapse: collapse;
+}
+
+tr {
+    display: flex;
+    justify-content: space-between;
+    flex-direction: row;
+    align-items: center;
+    border-radius: 7px;
+}
+  
+.todo {
+    background-color: #ffffff;
+    color: #000000;
+}
+  
+.checked_todo {
+    background-color: #5562eb;
+    color: #ffffff;
+}
+  
+td {
+    border: none;
+    padding: 7px;
+}
+  
+.hidden {
+    position: absolute;
+    left: -100vw;
+}
+  
+.all_todo_check::before {
+    content: '🏡';
+    font-size: 20px;
+}
+  
+.hidden:checked + .all_todo_check::before  {
+    content: '🐧';
+}
+
+.todo_checkbox_label::before {
+    content: '';
+    display: block;
+    color: #ffffff;
+    border: 3px solid #d9dee2;
+    border-radius: 50%;
+    height: 22px;
+    width: 22px;
+}
+
+.hidden:checked + .todo_checkbox_label::before {
+    content: '\2713';
+    background-color: #54e0c7;
+    border-color: #54e0c7;
+}
+
+.todo_text {
+    overflow-wrap: break-word;
+    width: 550px;
+}
+
+.btn_delete_todo {
+    border: none;
+    background-color: inherit;
+    color: inherit;
+}
