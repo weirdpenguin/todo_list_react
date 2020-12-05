@@ -20,7 +20,9 @@ class Todo extends React.Component {
     }
 
     addTodo(todo) {
+        // убрать пробелы по бокам из input
         this.setState((state) => ({todos: state.todos.concat(todo)}));
+        console.log(this.state.todos);
     }
 
     deleteTodo(id) {
@@ -30,8 +32,6 @@ class Todo extends React.Component {
     }
 
     checkTodo(id) {
-        // проверка: если все (todo.checked === true) => менять checkedAllTodos на true
-        // + проверка: убирать true с checkedAllTodos при снятии галочки
         this.setState((state) => ({
             todos: state.todos.map(
                 (todo) => {
@@ -48,33 +48,15 @@ class Todo extends React.Component {
             )
         }));
         this.checkTodosStatus();
-        console.log(this.state.checkedAllTodos);
     }
 
     checkTodosStatus() {
         this.setState((state) => ({
-            checkedAllTodos: state.todos.every(todo => todo.checked === true)
+            checkedAllTodos: state.todos.every(todo => todo.checked)
         }));
     }
 
     checkAllTodos() {
-        // this.setState({ todos: [] });
-        
-        // let todos = this.state.todos.slice();
-
-        // this.setState((state) => ({
-            // checkedAllTodos: !state.checkedAllTodos,
-        //     todos: todos.map(
-        //         (todo) => {
-        //             let checkAll = Object.assign(
-        //                 {},
-        //                 todo,
-        //                 {checked: !state.checkedAllTodos}
-        //             );
-        //             return checkAll;
-        //         }
-        //     )
-        // }));
         this.setState(function(state) {
             let todos = state.todos.slice();
 
@@ -93,8 +75,6 @@ class Todo extends React.Component {
 
             });
         });
-        // console.log(this.state.checkedAllTodos);
-        console.log(this.state.todos);
     }
 
     deleteCheckedTodos() {

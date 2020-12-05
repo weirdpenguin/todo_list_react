@@ -3,7 +3,6 @@ import styles from './TodoList.module.css'
 
 class TodoList extends React.Component {
     render() {
-        console.log(styles);
         const todos = this.props.todos;
         const todosList = todos.map((todo) =>
             <tr
@@ -42,17 +41,18 @@ class TodoList extends React.Component {
                 <thead>
                     <tr>
                         <td>
-                            {/* <label htmlFor='checkAllTodos'>🦖</label> */}
                             <input
                                 id='allTodoCheck'
                                 className={styles['hidden']}
                                 type='checkbox'
-                                checked={this.props.checkedAllTodos}
+                                checked={this.props.checkAllTodos}
                                 onChange={this.props.checkAllTodosF}
                             />
                             <label
                                 htmlFor='allTodoCheck'
-                                className={styles['all_todo_check']}
+                                className={todos.length > 0 ?
+                                    styles['all_todo_check'] :
+                                    styles['hidden']}
                             ></label>
                         </td>
                     </tr>
@@ -62,7 +62,9 @@ class TodoList extends React.Component {
                     <tr>
                         <td>
                             <button
-                                /* className={todo.checked ? styles['btn_delete_all_todo'] : styles['hidden']} */
+                                className={todos.some(todo => todo.checked) ?
+                                    styles['btn_delete_all_todos'] :
+                                    styles['btn_delete_all_todos_hidden']}
                                 onClick={this.props.deleteCheckedTodos}
                             >
                                     <i className="fas fa-trash"></i>
