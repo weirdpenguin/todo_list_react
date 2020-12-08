@@ -8,7 +8,6 @@ class Todo extends React.Component {
 
         this.state = {
             todos: [],
-            checkedAllTodos: false,
         };
 
         this.addTodo = this.addTodo.bind(this);
@@ -16,13 +15,10 @@ class Todo extends React.Component {
         this.checkTodo = this.checkTodo.bind(this);
         this.checkAllTodos = this.checkAllTodos.bind(this);
         this.deleteCheckedTodos = this.deleteCheckedTodos.bind(this);
-        this.checkTodosStatus = this.checkTodosStatus.bind(this);
     }
 
     addTodo(todo) {
-        // убрать пробелы по бокам из input
         this.setState((state) => ({todos: state.todos.concat(todo)}));
-        console.log(this.state.todos);
     }
 
     deleteTodo(id) {
@@ -47,27 +43,19 @@ class Todo extends React.Component {
                 }
             )
         }));
-        this.checkTodosStatus();
     }
 
-    checkTodosStatus() {
-        this.setState((state) => ({
-            checkedAllTodos: state.todos.every(todo => todo.checked)
-        }));
-    }
-
-    checkAllTodos() {
+    checkAllTodos(checked) {
         this.setState(function(state) {
             let todos = state.todos.slice();
 
             return ({
-                checkedAllTodos: !state.checkedAllTodos,
                 todos: todos.map(
                     (todo) => {
                         let checkAll = Object.assign(
                             {},
                             todo,
-                            {checked: !state.checkedAllTodos}
+                            {checked: checked}
                         );
                         return checkAll;
                     }
@@ -75,6 +63,7 @@ class Todo extends React.Component {
 
             });
         });
+        console.log(checked);
     }
 
     deleteCheckedTodos() {
@@ -83,7 +72,21 @@ class Todo extends React.Component {
         }));
     }
 
+    componentDidUpdate() {
+        const { todos } = this.state;
+        localStorage.setItem('todos', JSON.stringify(todos));
+    }
+
+    componentDidMount() {
+        // TODO: добавить проверку на пустое значение storage
+        const todos = JSON.parse(localStorage.getItem('todos'));
+        this.setState({ todos });
+    }
+
+
     render() {
+        console.log(this.componentDidMount);
+        console.log(this.componentDidUpdate);
         const todos = this.state.todos;
 
         return (
@@ -94,7 +97,6 @@ class Todo extends React.Component {
                 />
                 <TodoList
                     todos={todos}
-                    checkAllTodos={this.state.checkedAllTodos}
                     checkTodo={this.checkTodo}
                     deleteTodo={this.deleteTodo}
                     checkAllTodosF={this.checkAllTodos}

@@ -30,7 +30,7 @@ class TodoList extends React.Component {
                         className={styles['btn_delete_todo']}
                         onClick={() => this.props.deleteTodo(todo.id)}
                     >
-                            <i className='fas fa-eraser'></i>
+                        <i className='fas fa-eraser'></i>
                     </button>
                 </td>
             </tr>
@@ -45,8 +45,8 @@ class TodoList extends React.Component {
                                 id='allTodoCheck'
                                 className={styles['hidden']}
                                 type='checkbox'
-                                checked={this.props.checkAllTodos}
-                                onChange={this.props.checkAllTodosF}
+                                checked={todos.every(todo => todo.checked)}
+                                onChange={(event) => this.props.checkAllTodosF(event.target.checked)}
                             />
                             <label
                                 htmlFor='allTodoCheck'
@@ -67,7 +67,7 @@ class TodoList extends React.Component {
                                     styles['btn_delete_all_todos_hidden']}
                                 onClick={this.props.deleteCheckedTodos}
                             >
-                                    <i className="fas fa-trash"></i>
+                                <i className="far fa-trash-alt"></i>
                             </button>
                         </td>
                     </tr>

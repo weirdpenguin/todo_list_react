@@ -18,7 +18,7 @@ class AddingForm extends React.Component {
     }
 
     handleSubmit(event) {
-        this.props.addTodo(new TodoItem(this.state.todoInputValue));
+        this.props.addTodo(new TodoItem(this.state.todoInputValue.trim()));
         this.setState({todoInputValue: ''});
         event.preventDefault();
     }
@@ -32,7 +32,7 @@ class AddingForm extends React.Component {
                     type='text'
                     value={todoInputValue}
                     onChange={this.handleChange} />
-                <button>DO IT</button>
+                <button><i className='far fa-paper-plane'></i></button>
             </form>
         );
     }
