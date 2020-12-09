@@ -63,7 +63,6 @@ class Todo extends React.Component {
 
             });
         });
-        console.log(checked);
     }
 
     deleteCheckedTodos() {
@@ -78,15 +77,14 @@ class Todo extends React.Component {
     }
 
     componentDidMount() {
-        // TODO: добавить проверку на пустое значение storage
         const todos = JSON.parse(localStorage.getItem('todos'));
-        this.setState({ todos });
+        if (todos !== null) {
+            this.setState({ todos });
+        }
     }
 
 
     render() {
-        console.log(this.componentDidMount);
-        console.log(this.componentDidUpdate);
         const todos = this.state.todos;
 
         return (
