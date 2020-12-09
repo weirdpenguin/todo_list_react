@@ -1,6 +1,7 @@
 import React from 'react';
 import AddingForm from '../components/AddingForm';
 import TodoList from '../components/TodoList';
+import styles from './Todo.module.css'
 
 class Todo extends React.Component {
     constructor(props) {
@@ -88,7 +89,7 @@ class Todo extends React.Component {
         const todos = this.state.todos;
 
         return (
-            <div className='container'>
+            <div className={styles['container']}>
                 <AddingForm
                     todos={todos}
                     addTodo={this.addTodo}

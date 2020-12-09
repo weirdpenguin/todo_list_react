@@ -37,9 +37,10 @@ button {
 }
   
 .all_todo_check::before {
+    font-family: 'Font Awesome 5 Free';
     font-weight: 400;
     content: '\f111';
-    font-size: 30px;
+    font-size: 20px;
     cursor: pointer;
     color: #ffffff;
     transition: all 0.2s ease-out;
@@ -47,21 +48,24 @@ button {
 }
   
 .hidden:checked + .all_todo_check::before  {
+    font-family: 'Font Awesome 5 Free';
     content: '\f058';
     color: #5562eb;
     opacity: 1;
 }
 
 .todo_checkbox_label::before {
+    font-family: 'Font Awesome 5 Free';
     content: '\f111';
     color: #5562eb;
-    font-size: 15px;
+    font-size: 20px;
     font-weight: 400;
     cursor: pointer;
     opacity: 0.5;
 }
 
 .hidden:checked + .todo_checkbox_label::before {
+    font-family: 'Font Awesome 5 Free';
     content: '\f058';
     color: #ffffff;
     opacity: 1;
@@ -70,6 +74,9 @@ button {
 .todo_text {
     overflow-wrap: break-word;
     width: 550px;
+    font-size: 25px;
+    font-family: 'Kalam';
+    font-weight: 300;
 }
 
 .btn_delete_todo {
@@ -81,7 +88,7 @@ button {
 .btn_delete_all_todos {
     font-weight: 400;
     border:none;
-    font-size: 25px;
+    font-size: 20px;
     background-color: inherit;
     color: #5562eb;
     opacity: 1;

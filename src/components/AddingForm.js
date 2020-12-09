@@ -1,5 +1,6 @@
 import React from 'react';
 import TodoItem from '../models/TodoItem';
+import styles from './AddingForm.module.css'
 
 class AddingForm extends React.Component {
     constructor(props) {
@@ -31,8 +32,12 @@ class AddingForm extends React.Component {
                 <input
                     type='text'
                     value={todoInputValue}
+                    placeholder='What needs to be done?'
+                    className={styles['input_form']}
                     onChange={this.handleChange} />
-                <button><i className='far fa-paper-plane'></i></button>
+                <button
+                    className={styles['btn_submit']}
+                ><i className='far fa-paper-plane'></i></button>
             </form>
         );
     }
